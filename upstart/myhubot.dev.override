@@ -1,0 +1,6 @@
+setuid vagrant
+
+env HOME="/home/vagrant"
+
+env HUBOT_HIPCHAT_JID=YOUR_JID_HERE@chat.hipchat.com
+env HUBOT_HIPCHAT_PASSWORD=password

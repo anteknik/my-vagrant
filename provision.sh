@@ -16,7 +16,10 @@ dpkg -s libicu-dev &>/dev/null || {
 }
 
 cp /vagrant/upstart/myhubot.conf /etc/init/myhubot.conf
+machine=$1
+cp /vagrant/upstart/myhubot.$machine.override /etc/init/myhubot.override
 
-sudo -u vagrant -i sh -c 'cd /vagrant/myhubot; npm install'
+run_as_user=$2
+sudo -u $run_as_user -i sh -c 'cd /vagrant/myhubot; npm install'
 
 service myhubot restart

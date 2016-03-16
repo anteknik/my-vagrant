@@ -1,8 +1,22 @@
+#!/bin/bash
+
 apt-get -y update
 
-apt-get -y install nginx
+dpkg -s npm &>/dev/null || {
+  apt-get -y install nodejs npm
+  ln -s /usr/bin/nodejs /usr/bin/node
+}
 
-rm -rf /etc/nginx/sites-enabled
-cp -r /vagrant/sites-enabled /etc/nginx
+command -v hubot &>/dev/null || {
+  npm install -g hubot coffee-script
+}
 
-service nginx start
+dpkg -s libicu-dev &>/dev/null || {
+  apt-get -y install libexpat1-dev libicu-dev
+}
+
+cp /vagrant/upstart/myhubot.conf /etc/init/myhubot.conf
+
+sudo -u vagrant -i sh -c 'cd /vagrant/myhubot; npm install'
+
+service myhubot restart

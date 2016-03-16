@@ -1,4 +1,2 @@
-/modules/
-/.vagrant/
-/data/
-*.box
+.vagrant
+web
